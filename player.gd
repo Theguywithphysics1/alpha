@@ -4,8 +4,8 @@ const ACCELERATION = 800
 const FRICTION = 500
 const MAX_SPEED = 120
 
-enum {IDLE, RUN}
-var state = IDLE
+enum {idle, run}
+var state = idle
 
 @onready var animationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
@@ -25,12 +25,12 @@ func _physics_process(delta):
 	animate()
 
 func move(delta):
-	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if input_vector == Vector2.ZERO:
-		state = IDLE
+		state = idle
 		apply_friction(FRICTION * delta)
 	else:
-		state = RUN
+		state = run
 		apply_movement(input_vector * ACCELERATION * delta)
 		blend_position = input_vector
 	move_and_slide()
@@ -49,3 +49,9 @@ func apply_friction(amount) -> void:
 func animate() -> void:
 	state_machine.travel(animTree_state_keys[state])
 	animationTree.set(blend_pos_paths[state], blend_position)
+
+
+func _on_pickuparea_area_entered(area):
+	if area.is_in_group ("leaf"):
+		area.queue_free()
+		
