@@ -10,4 +10,5 @@ func _on_background_trigger_body_entered(body):
 
 
 func _on_bartrigger_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	if body is CharacterBody2D:
+		background.texture = new_background
