@@ -1,7 +1,10 @@
 [gd_scene format=4 uid="uid://cf83pbk8wtj6i"]
 
 [ext_resource type="Texture2D" uid="uid://bgkypht0xm3ci" path="res://texture/Tileset.png" id="1_epypp"]
+[ext_resource type="Script" uid="uid://b7avrr6bmpewr" path="res://node_2d.gd" id="1_kdubu"]
 [ext_resource type="Script" uid="uid://ci4gvleos5wi8" path="res://player.gd" id="2_0hol4"]
+[ext_resource type="Texture2D" uid="uid://b15um3170delp" path="res://individual-big-tables/tavern-preview.PNG" id="2_d21ai"]
+[ext_resource type="PackedScene" uid="uid://bo0t0hv7aebim" path="res://key.tscn" id="3_0hol4"]
 [ext_resource type="Texture2D" uid="uid://7w72woust4jr" path="res://texture/kodoszmodosz.png" id="3_q6r6c"]
 [ext_resource type="Texture2D" uid="uid://cpulh17xi5q6g" path="res://texture/house1_complete.png" id="4_4d7sh"]
 [ext_resource type="Texture2D" uid="uid://druxish0tymwk" path="res://texture/house2.png" id="5_ir8iy"]
@@ -2177,8 +2180,9 @@ b = Vector2(3592, -3276)
 a = Vector2(3593, -3270)
 b = Vector2(-2556, -3257)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8i5dt"]
-radius = 18.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5i757"]
+radius = 9.375
+height = 18.75
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d21ai"]
 atlas = ExtResource("3_q6r6c")
@@ -2299,23 +2303,23 @@ nodes/TimeScale/position = Vector2(0, 106.666664)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"run_bs2d"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2u7jv"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_24dk6"]
-advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mryly"]
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0hol4"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8i5dt"]
-states/End/position = Vector2(700.6667, 179.48148)
+states/End/position = Vector2(693.4667, 163.48148)
 states/Idle/node = SubResource("AnimationNodeBlendTree_2nhjh")
-states/Idle/position = Vector2(414.52576, 114.66667)
+states/Idle/position = Vector2(414.21167, 151.46667)
 states/Run/node = SubResource("AnimationNodeBlendTree_ebxd8")
-states/Run/position = Vector2(413.93317, 294)
-states/Start/position = Vector2(193.33333, 180)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2u7jv"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_24dk6"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_mryly")]
-graph_offset = Vector2(93.37761, 96)
+states/Run/position = Vector2(429.13318, 292.4)
+states/Start/position = Vector2(185.33333, 170.4)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2u7jv"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_24dk6"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_0hol4")]
+graph_offset = Vector2(-22.978521, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_438de"]
+size = Vector2(283.9821, 76.79122)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_74f4k"]
 a = Vector2(51, -5)
@@ -2551,6 +2555,7 @@ a = Vector2(-4107, -474)
 b = Vector2(-3866, -481)
 
 [node name="Node2D" type="Node2D" unique_id=5952431]
+script = ExtResource("1_kdubu")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=2001517441]
 visible = false
@@ -2943,7 +2948,15 @@ texture = ExtResource("9_nr8wp")
 [node name="Player" type="CharacterBody2D" parent="Download" unique_id=383015579]
 position = Vector2(-64.17554, 5.625814)
 scale = Vector2(0.12051745, 0.1679343)
+[node name="TavernBackground" type="Sprite2D" parent="." unique_id=2137873246]
+visible = false
+position = Vector2(543.5, -48.00006)
+scale = Vector2(3.2040606, 3.0481482)
+texture = ExtResource("2_d21ai")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=383015579]
 script = ExtResource("2_0hol4")
+key_scene = ExtResource("3_0hol4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Download/Player" unique_id=1714337570]
 position = Vector2(-805.5, 90.49991)
@@ -3217,3 +3230,37 @@ shape = SubResource("SegmentShape2D_wu6lb")
 [node name="CollisionShape2D39" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1895019594]
 position = Vector2(2777, 521)
 shape = SubResource("SegmentShape2D_2e5ml")
+[node name="AnimationTree" type="AnimationTree" parent="Player/AnimationTree" unique_id=27378422]
+tree_root = SubResource("AnimationNodeStateMachine_8i5dt")
+parameters/Idle/idle_bs2d/blend_position = Vector2(0, 0)
+parameters/Idle/TimeScale/scale = 0.09000000000000341
+parameters/Run/run_bs2d/blend_position = Vector2(0, 0)
+parameters/Run/TimeScale/scale = 1.0
+
+[node name="pickuparea" type="Area2D" parent="Player" unique_id=1721477925]
+position = Vector2(-2, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/pickuparea" unique_id=1337476784]
+position = Vector2(2, -2)
+scale = Vector2(1.7600024, 3.5200007)
+shape = SubResource("CapsuleShape2D_5i757")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1021731314]
+
+[node name="key" parent="." unique_id=250682637 instance=ExtResource("3_0hol4")]
+
+[node name="KeySpawn" type="Marker2D" parent="." unique_id=371273229]
+
+[node name="Bar" type="Sprite2D" parent="." unique_id=1712873770]
+position = Vector2(585, -27.500061)
+scale = Vector2(3.2149923, 3.0472221)
+
+[node name="Bartrigger" type="Area2D" parent="Bar" unique_id=588724397]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar/Bartrigger" unique_id=2000331060]
+position = Vector2(-778.07336, 497.01013)
+scale = Vector2(0.9999998, 1)
+shape = SubResource("RectangleShape2D_438de")
+
+[connection signal="area_entered" from="Player/pickuparea" to="Player" method="_on_pickuparea_area_entered"]
+[connection signal="body_entered" from="Bar/Bartrigger" to="." method="_on_bartrigger_body_entered"]
