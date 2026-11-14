@@ -5,18 +5,26 @@ var acceleration = 800.0
 var max_speed = 120.0
 var friction = 500.0
 
+=======
+const ACCELERATION = 800
+const FRICTION = 500
+const MAX_SPEED = 120
+>>>>>>> parent of f6152a6 (done)
 
-enum {IDLE, RUN}
-var state = IDLE
+enum {idle, run}
+var state = idle
 
 @onready var animationTree = $AnimationTree
 @onready var state_machine = animationTree["parameters/playback"]
 
 @export var key_scene: PackedScene
+@onready var key_spawn = get_parent().get_node("KeySpawn")
 
+var blend_position : Vector2 = Vector2.ZERO
 var blend_pos_paths = [
 	"parameters/idle/idle_bs2d/blend_position",
 	"parameters/run/run_bs2d/blend_position"
+<<<<<<< HEAD
 ]
 var animTree_state_keys = [
 	"Idle",
