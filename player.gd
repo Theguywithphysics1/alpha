@@ -4,7 +4,7 @@ extends CharacterBody2D
 var acceleration = 800.0
 var max_speed = 120.0
 var friction = 500.0
-@onready var background = $TavernBackground
+
 
 enum {IDLE, RUN}
 var state = IDLE
@@ -104,7 +104,7 @@ func spawn_key() -> void:
 
 func _on_bartrigger_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		background.visible = true
+		get_parent().get_node("TavernBackground").visible = true
 		$Ground.visible = false
 
 		body.get_node("AnimatedSprite2D").scale = Vector2(10, 10)

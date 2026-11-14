@@ -2226,7 +2226,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_rj586")
 }],
 "loop": 1,
-"name": &"idle",
+"name": &"IDLE",
 "speed": 5.0
 }, {
 "frames": [{
@@ -2249,7 +2249,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nr8wp")
 }],
 "loop": 1,
-"name": &"run",
+"name": &"RUN",
 "speed": 5.0
 }]
 
