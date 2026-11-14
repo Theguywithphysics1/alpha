@@ -369,7 +369,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_rj586")
 }],
 "loop": 1,
-"name": &"idle",
+"name": &"IDLE",
 "speed": 5.0
 }, {
 "frames": [{
@@ -392,7 +392,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nr8wp")
 }],
 "loop": 1,
-"name": &"run",
+"name": &"RUN",
 "speed": 5.0
 }]
 
@@ -489,9 +489,8 @@ shape = SubResource("CapsuleShape2D_5i757")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=2027926493]
 position = Vector2(5, -11)
 sprite_frames = SubResource("SpriteFrames_74f4k")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.7398586
+animation = &"IDLE"
+autoplay = "IDLE"
 
 [node name="AnimationTree" type="AnimationTree" parent="Player" unique_id=113062671]
 tree_root = SubResource("AnimationNodeStateMachine_8i5dt")
