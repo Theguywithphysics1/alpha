@@ -1,13 +1,14 @@
 extends Node2D
 
-@onready var background = $TavernBackground
+@onready var background = $Bar
+
+@export var new_background: Texture2D
+
+func _on_background_trigger_body_entered(body):
+	if body is CharacterBody2D:
+		background.texture = new_background
+
 
 func _on_bartrigger_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
-		background.visible = true
-		$Ground.visible = false
-
-		body.get_node("AnimatedSprite2D").scale = Vector2(10, 10)
-
-		var camera = body.get_node("Camera2D")
-		camera.zoom = Vector2(0.2, 0.2)
+		background.texture = new_background
