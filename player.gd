@@ -16,8 +16,8 @@ var blend_pos_paths = [
 	"parameters/run/run_bs2d/blend_position"
 ]
 var animTree_state_keys = [
-	"idle",
-	"run"
+	"Idle",
+	"Run"
 ]
 
 func _physics_process(delta):
@@ -25,7 +25,7 @@ func _physics_process(delta):
 	animate()
 
 func move(delta):
-	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if input_vector == Vector2.ZERO:
 		state = IDLE
 		apply_friction(FRICTION * delta)
