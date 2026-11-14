@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bgkypht0xm3ci" path="res://texture/Tileset.png" id="1_epypp"]
 [ext_resource type="Script" uid="uid://ci4gvleos5wi8" path="res://player.gd" id="2_0hol4"]
+[ext_resource type="PackedScene" uid="uid://bo0t0hv7aebim" path="res://key.tscn" id="3_0hol4"]
 [ext_resource type="Texture2D" uid="uid://7w72woust4jr" path="res://texture/kodoszmodosz.png" id="3_q6r6c"]
-[ext_resource type="Texture2D" uid="uid://cqf5k56ci0s6b" path="res://key.png" id="4_0hol4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kdubu"]
 texture = ExtResource("1_epypp")
@@ -321,6 +321,10 @@ terrain_set_0/terrain_0/name = "Ground 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_kdubu")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5i757"]
+radius = 9.375
+height = 18.75
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_d21ai"]
 atlas = ExtResource("3_q6r6c")
 region = Rect2(252, 0, 63, 153)
@@ -461,14 +465,6 @@ states/Start/position = Vector2(185.33333, 170.4)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2u7jv"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_24dk6"), "Start", "Run", SubResource("AnimationNodeStateMachineTransition_mryly"), "Run", "End", SubResource("AnimationNodeStateMachineTransition_0hol4")]
 graph_offset = Vector2(-22.978521, 96)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5i757"]
-radius = 9.375
-height = 18.75
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_438de"]
-radius = 30.662598
-height = 139.00366
-
 [node name="Node2D" type="Node2D" unique_id=5952431]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=2001517441]
@@ -477,6 +473,12 @@ tile_set = SubResource("TileSet_74f4k")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=383015579]
 script = ExtResource("2_0hol4")
+key_scene = ExtResource("3_0hol4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player" unique_id=807109807]
+position = Vector2(530, 108)
+scale = Vector2(1.7600024, 3.5200007)
+shape = SubResource("CapsuleShape2D_5i757")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=2027926493]
 position = Vector2(531, 77)
@@ -507,15 +509,8 @@ position = Vector2(2, -2)
 scale = Vector2(1.7600024, 3.5200007)
 shape = SubResource("CapsuleShape2D_5i757")
 
-[node name="key" type="Area2D" parent="." unique_id=2003539955 groups=["key"]]
+[node name="key" parent="." unique_id=250682637 instance=ExtResource("3_0hol4")]
 
-[node name="Sprite2D" type="Sprite2D" parent="key" unique_id=385240013]
-position = Vector2(578, 238)
-scale = Vector2(0.27139243, 0.42239648)
-texture = ExtResource("4_0hol4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="key/Sprite2D" unique_id=1382447037 groups=["key"]]
-position = Vector2(-34.75094, 7.054042)
-shape = SubResource("CapsuleShape2D_438de")
+[node name="KeySpawn" type="Marker2D" parent="." unique_id=371273229]
 
 [connection signal="area_entered" from="Player/pickuparea" to="Player" method="_on_pickuparea_area_entered"]

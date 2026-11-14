@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bo0t0hv7aebim"]
+
+[ext_resource type="Texture2D" uid="uid://cqf5k56ci0s6b" path="res://key.png" id="1_up4cr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_438de"]
+radius = 30.662598
+height = 139.00366
+
+[node name="key" type="Area2D" unique_id=250682637 groups=["key"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=293853173]
+position = Vector2(578, 238)
+scale = Vector2(0.27139243, 0.42239648)
+texture = ExtResource("1_up4cr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1462640620 groups=["key"]]
+position = Vector2(568.56885, 240.9796)
+scale = Vector2(0.27139243, 0.42239648)
+shape = SubResource("CapsuleShape2D_438de")
